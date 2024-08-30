@@ -30,7 +30,7 @@ export class TasksController {
     return this.tasksService.getTasks(query);
   }
 
-  @Get('findTask/:id')
+  @Get('/findTask/:id')
   getTask(@Param('id') id: string) {
     return this.tasksService.getTask(parseInt(id));
   }
@@ -52,24 +52,24 @@ export class TasksController {
     return id + 14;
   }
 
-  // @Post()
-  // createTask(@Body() task: TasksProps) {
-  //   console.log(task);
-  //   return this.tasksService.createTasks(task);
-  // }
+  @Post()
+  createTask(@Body() task: TasksProps) {
+    console.log(task);
+    return this.tasksService.createTasks(task);
+  }
 
-  // @Put()
-  // updateTask(@Body() task: UpdateTaskDto) {
-  //   return this.tasksService.updateTasks(task);
-  // }
+  @Put()
+  updateTask(@Body() task: UpdateTaskDto) {
+    return this.tasksService.updateTasks(task);
+  }
 
-  // @Delete()
-  // deleteTask() {
-  //   return this.tasksService.deleteTasks();
-  // }
+  @Delete()
+  deleteTask() {
+    return this.tasksService.deleteTasks();
+  }
 
-  // @Patch()
-  // updateTaskStatus() {
-  //   return this.tasksService.updateTaskStatus();
-  // }
+  @Patch()
+  updateTaskStatus() {
+    return this.tasksService.updateTaskStatus();
+  }
 }
