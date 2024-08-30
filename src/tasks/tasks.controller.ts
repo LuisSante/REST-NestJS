@@ -3,15 +3,20 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TasksProps } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { ValidatetasksPipe } from './pipes/validatetasks/validatetasks.pipe';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @Controller('/tasks')
 export class TasksController {
@@ -25,29 +30,46 @@ export class TasksController {
     return this.tasksService.getTasks(query);
   }
 
-  @Get('/:id')
+  @Get('findTask/:id')
   getTask(@Param('id') id: string) {
     return this.tasksService.getTask(parseInt(id));
   }
 
-  @Post()
-  createTask(@Body() task: TasksProps) {
-    console.log(task);
-    return this.tasksService.createTasks(task);
+  @Get('/greet')
+  @UseGuards(AuthGuard)
+  getGreet(@Query(ValidatetasksPipe) query: { name: string; age: string }) {
+    return `hello ${query.name}, you are ${query.age + 7456946} years old`;
   }
 
-  @Put()
-  updateTask(@Body() task: UpdateTaskDto) {
-    return this.tasksService.updateTasks(task);
+  @Get('error')
+  @HttpCode(500)
+  getError() {
+    return 'Error Route!!';
   }
 
-  @Delete()
-  deleteTask() {
-    return this.tasksService.deleteTasks();
+  @Get('/ticket/:id')
+  getNumberParam(@Param('id', ParseIntPipe) id: number) {
+    return id + 14;
   }
 
-  @Patch()
-  updateTaskStatus() {
-    return this.tasksService.updateTaskStatus();
-  }
+  // @Post()
+  // createTask(@Body() task: TasksProps) {
+  //   console.log(task);
+  //   return this.tasksService.createTasks(task);
+  // }
+
+  // @Put()
+  // updateTask(@Body() task: UpdateTaskDto) {
+  //   return this.tasksService.updateTasks(task);
+  // }
+
+  // @Delete()
+  // deleteTask() {
+  //   return this.tasksService.deleteTasks();
+  // }
+
+  // @Patch()
+  // updateTaskStatus() {
+  //   return this.tasksService.updateTaskStatus();
+  // }
 }
