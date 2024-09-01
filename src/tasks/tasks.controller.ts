@@ -17,8 +17,10 @@ import { TasksProps } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { ValidatetasksPipe } from './pipes/validatetasks/validatetasks.pipe';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('/tasks')
+@ApiTags('tasks')
 export class TasksController {
   tasksService: TasksService;
   constructor(tasksService: TasksService) {
