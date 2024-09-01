@@ -1,0 +1,32 @@
+# version: '3.9'
+# services:
+#   db:
+#     image: postgres
+#     restart: always
+#     environment:
+#       POSTGRES_USER: rest_api
+#       POSTGRES_PASSWORD: rest_api
+#       POSTGRES_DB: rest_api
+#     volumes:
+#       - ./data:/var/lib/postgresql/data
+#     ports:
+#       - 5432:5432
+
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    container_name: rest_api
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: rest_api
+      POSTGRES_USER: rest_api
+      POSTGRES_PASSWORD: rest_api
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

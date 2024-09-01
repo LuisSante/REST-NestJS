@@ -3,8 +3,9 @@ import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ProjectsModule } from './projects/projects.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
-  imports: [TasksModule, UsersModule, AuthModule, ProjectsModule],
+  imports: [TasksModule, UsersModule, AuthModule, ProjectsModule, PaymentsModule],
 })
 export class AppModule {}
